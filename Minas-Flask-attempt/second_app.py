@@ -3,65 +3,84 @@
 #################################################
 # Import the dependencies.
 #################################################
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from config import user, password, host, port, database
 from flask import Flask, render_template
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import text
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-from . import db
 from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
+import json
+
 
 #################################################
 # Create App and Create Engine and Base
 #################################################
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@{host}:{port}/{database}"
 db = SQLAlchemy(app)
 
-engine = create_engine(
-    f"postgresql://{user}:{password}@{host}:{port}/{database}"
-)
-Base = declarative_base(bind=engine)
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
-#################################################
-# Database Connection
-#################################################
-def get_connection():
-    return engine
+Base = db.Model
 
-if __name__ == '__main__':
-    try:
-        engine = get_connection()
-        print("Connection to the database created successfully.")
-    except Exception as ex:
-        print("Connection could not be made due to the following error:\n", ex)
+@app.route('/heatmap')
+def heatmap():
+    # Execute the query using SQLAlchemy's execute() method
+    with engine.connect() as conn:
+        query = "SELECT latitude, longitude, state FROM deaths_perstate_wCoords2021"
+        result = conn.execute(query)
+        data = result.fetchall()
 
+    # Create a pandas DataFrame from the query result
+    df = pd.DataFrame(data, columns=['latitude', 'longitude', 'state'])
 
-#################################################
-# Create Classes(Tables)
-#################################################
-class Example(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(255))
+    # Convert Decimal values to strings
+    df['latitude'] = df['latitude'].apply(str)
+    df['longitude'] = df['longitude'].apply(str)
 
-class Example(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(255))
+    # Create a list of coordinates and values for the heatmap
+    heatmap_data = df.to_dict(orient='records')
 
-Base.metadata.create_all()
-#################################################
-# Flask Routes
-#################################################
-##homepage 
-@app.route('/')
-def home():
-   return render_template('home.html')
+    # Convert the heatmap data to JSON string
+    heatmap_json = json.dumps(heatmap_data)
+
+    # Render the HTML template with the heatmap data
+    return render_template('heatmap_d3.html', heatmap_data=heatmap_json)
 
 if __name__ == '__main__':
     app.run()
 
+#################################################
+# Database Connection
+#################################################
+#################################################
+# Create Classes(Tables)
+#################################################
+#class Death_byState_2021(db.Model):
+    #id = db.Column(db.Integer, primary_key=True)
+    #data = db.Column(db.String(255))
+
+#class Death_byState_2022(db.Model):
+    #id = db.Column(db.Integer, primary_key=True)
+    #data = db.Column(db.String(255))
+
+#class Death_byState_2023(db.Model):
+    #id = db.Column(db.Integer, primary_key=True)
+    #data = db.Column(db.String(255))
+
+
+
+#Base.metadata.create_all()
+#################################################
+# Flask Routes
+#################################################
+##homepage 
+#@app.route('/')
+#def index():
+   #return render_template('index.html')
+
+#if __name__ == '__main__':
+    #app.run()
 
 ##barchart
 #@app.route('/bar_chart')
@@ -89,19 +108,7 @@ if __name__ == '__main__':
 
 
 ##heatmap
-@app.route('/heatmap')
-def heatmap():
-    try: 
-        session= create_session()
-        query= text("SELECT latitude, longitude, name FROM capital_coords")
 
-        with session.begin():
-            result= session.execute(query)
-            data= result.fetchall()
-
-            return "Heatmap Generated Successfully"
-    except SQLAlchemyError as ex:
-        return 'Database error occurred: {}'.format(str(ex))
 #################################################
 # Create Session
 #################################################
