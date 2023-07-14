@@ -19,7 +19,11 @@ def create_session():
      Session = sessionmaker(bind=engine)
      return Session()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -38,7 +42,11 @@ def index():
          return 'Database error occurred: {}'.format(str(ex))
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 if __name__ == '__main__':
+=======
+if __name__ == 'main':
+>>>>>>> Stashed changes
 =======
 if __name__ == 'main':
 >>>>>>> Stashed changes
