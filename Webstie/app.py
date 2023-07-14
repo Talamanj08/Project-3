@@ -7,8 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 
 
-# connect to data base
-
+#connect to data base
 engine = create_engine(db_url)
 connection = engine.connect()
 
@@ -19,7 +18,11 @@ def create_session():
      engine = connection()
      Session = sessionmaker(bind=engine)
      return Session()
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 
 @app.route('/')
 def index():
@@ -34,5 +37,9 @@ def index():
          # Handle any database errors
          return 'Database error occurred: {}'.format(str(ex))
 
+<<<<<<< Updated upstream
 if __name__ == '__main__':
+=======
+if __name__ == 'main':
+>>>>>>> Stashed changes
      app.run()
