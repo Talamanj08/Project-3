@@ -9,7 +9,7 @@ DROP TABLE Death_byAge_2022;
 DROP TABLE Death_byAge_2023;
 DROP TABLE Vaccination2021;
 DROP TABLE Vaccination2022;
-DROP TABLE Vaccination2023;
+DROP TABLE Vaccination2021and2022;
 DROP TABLE State_Population;
 DROP TABLE per_capita_byState_2021;
 DROP TABLE per_capita_byState_2022;
@@ -139,27 +139,26 @@ SELECT * FROM Death_byAge_2023;
 CREATE TABLE Vaccination2021 (
 	Year_2021 INT, 
 	State VARCHAR, 
-	Dose_1_Administered BIGINT,
-	Series_Completed BIGINT
+	Dose_1_Administered NUMERIC ,
+	Series_Completed NUMERIC 
 );
 SELECT * FROM Vaccination2021;
 
 CREATE TABLE Vaccination2022 (
 	Year_2022 INT, 
 	State VARCHAR, 
-	Dose_1_Administered BIGINT,
-	Series_Completed BIGINT
+	Dose_1_Administered NUMERIC,
+	Series_Completed NUMERIC
 );
 SELECT * FROM Vaccination2022;
 
-CREATE TABLE Vaccination2023 (
-	Year_2023 INT, 
+CREATE TABLE Vaccination2021and2022 (
+	Years INT, 
 	State VARCHAR, 
-	Dose_1_Administered BIGINT,
-	Series_Completed BIGINT
+	Dose_1_Administered NUMERIC,
+	Series_Completed NUMERIC
 );
-SELECT * FROM Vaccination2023;
-
+SELECT * FROM Vaccination2021and2022;
 
 CREATE TABLE State_Population (
     State varchar NOT NULL,
