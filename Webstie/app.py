@@ -20,7 +20,15 @@ def create_session():
      return Session()
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -43,7 +51,15 @@ def index():
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 if __name__ == '__main__':
+=======
+if __name__ == 'main':
+>>>>>>> Stashed changes
+=======
+if __name__ == 'main':
+>>>>>>> Stashed changes
 =======
 if __name__ == 'main':
 >>>>>>> Stashed changes
