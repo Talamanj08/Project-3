@@ -16,6 +16,21 @@
         var labels = JSON.parse(canvas.dataset.labels);
         var values = JSON.parse(canvas.dataset.values);
 
+        // Remove the first label (State) and value from the arrays
+        labels.shift();
+        values.shift();
+
+        // Define custom colors for the chart
+        var colors = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
+            // Add more colors if needed
+        ];
+
         // Create pie chart
         var ctx = canvas.getContext('2d');
         var pieChart = new Chart(ctx, {
@@ -24,19 +39,18 @@
                 labels: labels,
                 datasets: [{
                     data: values,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)'
-                        // Add more colors if needed
-                    ]
+                    backgroundColor: colors.slice(0, labels.length) // Use the colors based on the number of labels
                 }]
             },
             options: {
-                // Chart options here (e.g., title, legend, etc.)
+                title: {
+                    display: true,
+                    text: 'Cause of Death Pie Chart'
+                },
+                legend: {
+                    display: true
+                }
+                // Add more chart options as needed
             }
         });
     </script>
