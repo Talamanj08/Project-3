@@ -16,6 +16,18 @@ DROP TABLE per_capita_byState_2022;
 DROP TABLE capital_coords;
 DROP TABLE deaths_perstate_wCoords2021;
 DROP TABLE deaths_perstate_wCoords2022;
+DROP TABLE cause_of_death;
+
+CREATE TABLE cause_of_death (
+	State varchar NOT NULL,
+	COVID_19_Deaths numeric NOT NULL,
+	Total_Deaths numeric NOT NULL,
+	Pneumonia_Deaths numeric  NOT NULL,
+	Pneumonia_and_COVID_19_Deaths numeric  NOT NULL,
+	Influenza_Deaths numeric  NOT NULL,
+	Pneumonia_Influenza_or_COVID_19_Deaths numeric  NOT NULL
+);
+SELECT * FROM cause_of_death;
 
 CREATE TABLE Death_byState_2021 (
 	Year_2021 Int  NOT NULL,
