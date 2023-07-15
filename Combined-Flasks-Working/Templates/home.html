@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to our Project 3!</h1>
+    <p>Click on the buttons below to see our Visuals:</p>
+    <div>
+        <!-- Button to navigate to the Pie Chart route -->
+        <a href="{{ url_for('pie_chart') }}">
+            <button>Pie Chart</button>
+        </a>
+    </div>
+    <div>
+        <!-- Button to navigate to the Map route -->
+        <a href="{{ url_for('map') }}">
+            <button>Map</button>
+        </a>
+    </div>
+    <div>
+        <!-- Button to navigate to the Map route -->
+        <a href="{{ url_for('barchart') }}">
+            <button>Bar Chart</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -16,6 +16,36 @@ DROP TABLE per_capita_byState_2022;
 DROP TABLE capital_coords;
 DROP TABLE deaths_perstate_wCoords2021;
 DROP TABLE deaths_perstate_wCoords2022;
+DROP TABLE cause_of_death;
+DROP TABLE total_vaxs_vs_deaths_2021;
+DROP TABLE total_vaxs_vs_deaths_2022;
+
+CREATE TABLE total_vaxs_vs_deaths_2021 (
+    Year INT,
+    total_dose_1_administered INT,
+    total_series_completed INT,
+    total_covid_19_deaths INT
+);
+SELECT * FROM total_vaxs_vs_deaths_2021;
+
+CREATE TABLE total_vaxs_vs_deaths_2022 (
+    Year INT,
+    total_dose_1_administered INT,
+    total_series_completed INT,
+    total_covid_19_deaths INT
+);
+SELECT * FROM total_vaxs_vs_deaths_2022;
+
+CREATE TABLE cause_of_death (
+	State varchar NOT NULL,
+	COVID_19_Deaths numeric NOT NULL,
+	Total_Deaths numeric NOT NULL,
+	Pneumonia_Deaths numeric  NOT NULL,
+	Pneumonia_and_COVID_19_Deaths numeric  NOT NULL,
+	Influenza_Deaths numeric  NOT NULL,
+	Pneumonia_Influenza_or_COVID_19_Deaths numeric  NOT NULL
+);
+SELECT * FROM cause_of_death;
 
 CREATE TABLE Death_byState_2021 (
 	Year_2021 Int  NOT NULL,
