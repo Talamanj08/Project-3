@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>COVID-19 Dashboard</title>
+  <style>
+    /* CSS for tabs */
+    .tab {
+      display: none;
+    }
+    .tabcontent {
+      background-color: #f1f1f1;
+      padding: 20px;
+      display: none;
+      height: 400px;
+    }
+    #totalDeathsTab {
+      display: block;
+    }
+    #tabButtons {
+      overflow: hidden;
+      background-color: #333;
+    }
+    .tabButton {
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      color: white;
+      transition: 0.3s;
+    }
+    .tabButton:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .tabButton.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    /* CSS for background image */
+    body {
+      background-image: url("https://epe.brightspotcdn.com/dims4/default/bffda17/2147483647/strip/true/crop/2062x1399+99+0/resize/840x570!/format/webp/quality/90/?url=https%3A%2F%2Fepe-brightspot.s3.amazonaws.com%2F58%2F8c%2F8a44731f4be4959b7ee8dde4cfad%2F10102022-covid-dashboard-data-1249577830-1.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="tabButtons">
+    <button class="tabButton" onclick="openTab(event, 'totalDeathsTab')">Total Deaths</button>
+    <button class="tabButton" onclick="openTab(event, 'deathsVsVaccinesTab')">Deaths vs Vaccines</button>
+    <button class="tabButton" onclick="openTab(event, 'mapTab')">Map</button>
+  </div>
+
+  <div id="totalDeathsTab" class="tabcontent">
+    <h3>Total Deaths</h3>
+    <!-- Content for Total Deaths tab -->
+  </div>
+
+  <div id="deathsVsVaccinesTab" class="tabcontent">
+    <h3>Deaths vs Vaccines</h3>
+    <!-- Content for Deaths vs Vaccines tab -->
+  </div>
+
+  <div id="mapTab" class="tabcontent">
+    <h3>Map</h3>
+    <!-- Content for Map tab -->
+  </div>
+
+  <script>
+    // JavaScript to handle tab functionality
+    function openTab(evt, tabName) {
+      var i, tabcontent, tabButtons;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tabButtons = document.getElementsByClassName("tabButton");
+      for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+</body>
+</html>
