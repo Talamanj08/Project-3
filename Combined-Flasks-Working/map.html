@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.1/chroma.min.js"></script>
+  <title>Continental United States Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map-container {
+      height: 80vh;
+    }
+
+    #legend-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+      padding: 10px;
+      background-color: white;
+      border-radius: 4px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .legend-label {
+      margin-left: 5px;
+    }
+
+    #toggle-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      padding: 10px;
+      background-color: white;
+      border-radius: 4px;
+    }
+    .button-group {
+        display: flex; /* Display buttons side by side */
+        gap: 10px; /* Add some spacing between buttons */
+        width: 400px; /* Set a fixed width for all buttons */
+        }
+
+        /* Style for all buttons */
+    .action-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent; /* Set background to transparent */
+        color: black;
+        border: 2px solid #333; /* Add a border around the button */
+        padding: 11px 15px;
+        font-size: 11px;
+        cursor: pointer;
+        border-radius: 4px;
+        flex: 1; /* Expand to fill available space */
+        transition: background-color 0.3s ease; /* Add a smooth transition effect */
+        }
+
+        /* Change the button's background color on hover */
+    .action-button:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Light transparent color on hover */
+        }
+
+        /* Style for all icons */
+    .action-button i {
+        margin-right: 8px; /* Add some space between icon and text */
+        font-size: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div>
+        <h2>Total Covid-19 Deaths; Continental US </h2>
+    </div>
+    <div class="button-group">
+        <a href="{{ url_for('home') }}">
+            <button class="action-button">
+                <i class="fas fa-home" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for home -->
+                Home
+            </button>
+        </a>
+        <a href="{{ url_for('pie_chart') }}">
+            <button class="action-button">
+                <i class="fas fa-chart-pie" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for pie chart -->
+                Pie Chart
+            </button>
+        </a>
+        <a href="{{ url_for('map') }}">
+            <button class="action-button">
+                <i class="fas fa-map" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for map -->
+                Map
+            </button>
+        </a>
+        <a href="{{ url_for('barchart') }}">
+            <button class="action-button">
+                <i class="fas fa-chart-bar" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for bar chart -->
+                Bar Chart
+            </button>
+        </a>
+
+        <!-- Add the Font Awesome 5 icon for GitHub -->
+        <a href="https://github.com/Talamanj08/Project-3" target="_blank">
+            <button class="action-button">
+                <i class="fab fa-github" style="color: #15d7e5;"></i>
+                GitHub
+            </button>
+        </a>
+    </div>
+    <div id="map-container"></div>
+    <div id="legend-container"></div>
+    <div id="toggle-container">
+        <label>
+            <input type="checkbox" id="toggle-checkbox"> Show 2022 Data
+        </label>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map-container').setView([37.8, -96], 4);
+
+        var streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        });
+
+        var topoLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.opentopomap.org/">OpenTopoMap</a> contributors',
+            maxZoom: 17
+        });
+
+        var baseLayers = {
+            "Street": streetLayer,
+            "Topo": topoLayer
+        };
+
+        L.control.layers(baseLayers).addTo(map);
+        streetLayer.addTo(map);
+
+        var minDeaths2021, maxDeaths2021, minDeaths2022, maxDeaths2022;
+        var colorScale2021, colorScale2022;
+        var geojson2021, geojson2022;
+        var toggleCheckbox = document.getElementById('toggle-checkbox');
+        var mapTypeToggle = document.getElementsByName('map-type');
+
+        function createMarker(feature, latlng, value, colorScale) {
+            var color = colorScale(value).hex();
+
+            var markerOptions = {
+                radius: 16,
+                fillColor: color,
+                color: '#000',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.7
+            };
+
+            var marker = L.circleMarker(latlng, markerOptions);
+
+            var tooltipContent = '<div>' +
+                '<strong>State: </strong>' + feature.properties.state + '<br>' +
+                '<strong>Deaths per Capita: </strong>' + value.toFixed(2) +
+                '</div>';
+
+            marker.bindTooltip(tooltipContent, { sticky: true });
+
+            marker.on('mouseover', function (e) {
+                this.openTooltip();
+            });
+
+            marker.on('mouseout', function (e) {
+                this.closeTooltip();
+            });
+
+            return marker;
+        }
+
+        function onEachFeature2021(feature, layer) {
+            var value = feature.properties.deaths_per_capita_2021;
+            var marker = createMarker(feature, layer.getLatLng(), value, colorScale2021);
+            layer.bindPopup(marker.getTooltip().getContent());
+        }
+
+        function onEachFeature2022(feature, layer) {
+            var value = feature.properties.deaths_per_capita_2022;
+            var marker = createMarker(feature, layer.getLatLng(), value, colorScale2022);
+            layer.bindPopup(marker.getTooltip().getContent());
+        }
+
+        fetch('/map-data-2021')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // Calculate min and max deaths values for 2021
+                minDeaths2021 = Math.min(...data.features.map(feature => feature.properties.deaths_per_capita_2021));
+                maxDeaths2021 = Math.max(...data.features.map(feature => feature.properties.deaths_per_capita_2021));
+
+                colorScale2021 = chroma.scale('Reds').domain([minDeaths2021, maxDeaths2021]);
+
+                geojson2021 = L.geoJSON(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return createMarker(feature, latlng, feature.properties.deaths_per_capita_2021, colorScale2021);
+                    },
+                    onEachFeature: onEachFeature2021
+                }).addTo(map);
+
+                updateLegend(colorScale2021, minDeaths2021, maxDeaths2021);
+            });
+
+        toggleCheckbox.addEventListener('change', toggleYearData);
+
+        function toggleYearData() {
+            if (toggleCheckbox.checked) {
+                map.removeLayer(geojson2021);
+                fetch('/map-data-2022')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        // Calculate min and max deaths values for 2022
+                        minDeaths2022 = Math.min(...data.features.map(feature => feature.properties.deaths_per_capita_2022));
+                        maxDeaths2022 = Math.max(...data.features.map(feature => feature.properties.deaths_per_capita_2022));
+
+                        colorScale2022 = chroma.scale('Blues').domain([minDeaths2022, maxDeaths2022]);
+
+                        geojson2022 = L.geoJSON(data, {
+                            pointToLayer: function (feature, latlng) {
+                                return createMarker(feature, latlng, feature.properties.deaths_per_capita_2022, colorScale2022);
+                            },
+                            onEachFeature: onEachFeature2022
+                        }).addTo(map);
+
+                        updateLegend(colorScale2022, minDeaths2022, maxDeaths2022);
+                    });
+            } else {
+                map.removeLayer(geojson2022);
+                geojson2021.addTo(map);
+
+                updateLegend(colorScale2021, minDeaths2021, maxDeaths2021);
+            }
+        }
+
+        function updateLegend(colorScale, minDeaths, maxDeaths) {
+            var legendContainer = document.getElementById('legend-container');
+
+            var gradientSteps = 6;
+            var legendLabels = chroma.limits([minDeaths, maxDeaths], 'e', gradientSteps);
+
+            var legendContent = '';
+            for (var i = 0; i < gradientSteps; i++) {
+                var color = colorScale(legendLabels[i]).hex();
+                var label = legendLabels[i].toFixed(2);
+
+                legendContent += '<div class="legend-row">';
+                legendContent += '<div class="legend-color" style="background-color: ' + color + '"></div>';
+                legendContent += '<div class="legend-label">' + label + '</div>';
+                legendContent += '</div>';
+            }
+
+            legendContainer.innerHTML = legendContent;
+        }
+
+        function toggleMapType(mapType) {
+            if (mapType === 'street') {
+                map.removeLayer(topoLayer);
+                streetLayer.addTo(map);
+            } else if (mapType === 'topo') {
+                map.removeLayer(streetLayer);
+                topoLayer.addTo(map);
+            }
+        }
+    </script>
+</body>
+</html>

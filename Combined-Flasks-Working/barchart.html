@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            max-width: 800px; /* Set the maximum width */
+            max-height: 600px; /* Set the maximum height */
+            margin: 0 ; /* Center the canvas horizontally */
+            display: block; /* Make the canvas a block-level element */
+        }
+
+        .chart-container {
+            display: flex; /* Use flexbox for the container */
+            flex-wrap: wrap; /* Wrap the charts and titles */
+        }
+
+        .chart-container > div {
+            flex: 1; /* Each chart takes equal space */
+            padding: 10px; /* Add some padding between the charts */
+            min-width: 400px; /* Set a minimum width for each chart container */
+        }
+
+        .button-group {
+            display: flex; /* Display buttons side by side */
+            gap: 10px; /* Add some spacing between buttons */
+            width: 400px; /* Set the width to fill the container */
+        }
+
+        /* Style for all buttons */
+        .action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent; /* Set background to transparent */
+            color: black;
+            border: 2px solid #333; /* Add a border around the button */
+            padding: 11px 15px;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 4px;
+            flex: 1; /* Expand to fill available space */
+            transition: background-color 0.3s ease; /* Add a smooth transition effect */
+        }
+
+        /* Change the button's background color on hover */
+        .action-button:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Light transparent color on hover */
+        }
+
+        /* Style for all icons */
+        .action-button i {
+            margin-right: 8px; /* Add some space between icon and text */
+            font-size: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div>
+        <h2>Vaccination and COVID-19 Statistics</h2>
+    </div>
+    <div class="button-group">
+        <a href="{{ url_for('home') }}">
+            <button class="action-button">
+                <i class="fas fa-home" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for home -->
+                Home
+            </button>
+        </a>
+        <a href="{{ url_for('pie_chart') }}">
+            <button class="action-button">
+                <i class="fas fa-chart-pie" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for pie chart -->
+                Pie Chart
+            </button>
+        </a>
+        <a href="{{ url_for('map') }}">
+            <button class="action-button">
+                <i class="fas fa-map" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for map -->
+                Map
+            </button>
+        </a>
+        <a href="{{ url_for('barchart') }}">
+            <button class="action-button">
+                <i class="fas fa-chart-bar" style="color: #15d7e5;"></i> <!-- Add the Font Awesome icon for bar chart -->
+                Bar Chart
+            </button>
+        </a>
+
+        <!-- Add the Font Awesome 5 icon for GitHub -->
+        <a href="https://github.com/Talamanj08/Project-3" target="_blank">
+            <button class="action-button">
+                <i class="fab fa-github" style="color: #15d7e5;"></i>
+                GitHub
+            </button>
+        </a>
+    </div>
+    <div class="chart-container">
+        <div>
+            <h2>2021 Data</h2>
+            <canvas id="barchart-2021"></canvas>
+        </div>
+        <div>
+            <h2>2022 Data</h2>
+            <canvas id="barchart-2022"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx1 = document.getElementById('barchart-2021').getContext('2d');
+            var ctx2 = document.getElementById('barchart-2022').getContext('2d');
+
+            var data1 = JSON.parse('{{ chart_data_2021 | safe }}');
+            var data2 = JSON.parse('{{ chart_data_2022 | safe }}');
+
+            var labels1 = data1.labels;
+            var labels2 = data2.labels;
+
+            var counts1 = data1.counts;
+            var counts2 = data2.counts;
+
+            //  Barchart 1    
+            var chartData1 = {
+                labels: labels1,
+                datasets: [{
+                    label: 'Counts',
+                    data: counts1,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+            
+            //  Barchart 2
+            var chartData2 = {
+                labels: labels2,
+                datasets: [{
+                    label: 'Counts',
+                    data: counts2,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+
+            // Set barchat layout options
+            var options = {
+                responsive: true,
+                scales: {
+                    y: {
+                        type: 'logarithmic',
+                        grid: {
+                            display: false  // To remove the grid lines
+                        }
+                    }
+                }
+            };
+
+
+            new Chart(ctx1, {
+                type: 'bar',
+                data: chartData1,
+                options: options
+            });
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: chartData2,
+                options: options
+            });
+        });
+    </script>
+</body>
+</html>
