@@ -2,7 +2,15 @@
 
 Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 
-sum
+
+## Code Info / Data Process
+Raw data was retrieved in CSV form. Data cleanup was preformed within Jupyter Notebook using Pandas and all data was stored and sorted in PostgreSQL.
+
+Using Flask as our web framework, data stored within our PostgreSQL database was imported using psycopg2. Jsonify was used from the Flask Library to convert all SQL data into JSON format. 
+
+The Javascript libraries Chart.js and D3 were used for data visualization. Chart.js was utililzed for data graphing, while D3 was used to create a heatmap.
+
+## Summary / Conclusions
 
 
 ## References: 
@@ -19,5 +27,5 @@ US state Capitals Coordinates (stolen from someone’s github)
 -  https://github.com/jasperdebie/VisInfo/blob/master/us-state-capitals.csv
 
 
-Project Proposal: https://docs.google.com/document/d/1S5r0pV_Z4pcUn92i68-pTQz1liKfdy-L9NvOmP9dEjg/edit?usp=sharing
+## Project Proposal: https://docs.google.com/document/d/1S5r0pV_Z4pcUn92i68-pTQz1liKfdy-L9NvOmP9dEjg/edit?usp=sharing
 
