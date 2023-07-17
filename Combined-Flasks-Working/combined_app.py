@@ -91,18 +91,29 @@ def barchart():
 
     # Prepare the data for the 2021 chart
     chart_data_2021 = {
-        'labels': ['Total Dose 1 Administered', 'Total Series Completed', 'Total COVID-19 Deaths'],
+        'labels': ['Total Dose 1 Administered', 'Total Series Completed', 'total_covid_19_deaths'],
         'counts': [total_dose_1_administered_2021, total_series_completed_2021, total_covid_19_deaths_2021]
     }
 
     # Prepare the data for the 2022 chart
     chart_data_2022 = {
-        'labels': ['Total Dose 1 Administered', 'Total Series Completed', 'Total COVID-19 Deaths'],
+        'labels': ['Total Dose 1 Administered', 'Total Series Completed', 'total_covid_19_deaths'],
         'counts': [total_dose_1_administered_2022, total_series_completed_2022, total_covid_19_deaths_2022]
     }
 
+    # Prepare the data for the third chart
+    chart_data_third = {
+        'labels': ['2021', '2022'],
+        'counts': [total_covid_19_deaths_2021, total_covid_19_deaths_2022]
+    }
+
     # Pass the chart data to the template
-    return render_template('barchart.html', chart_data_2021=json.dumps(chart_data_2021), chart_data_2022=json.dumps(chart_data_2022))
+    return render_template(
+        'barchart.html',
+        chart_data_2021=json.dumps(chart_data_2021),
+        chart_data_2022=json.dumps(chart_data_2022),
+        chart_data_third=json.dumps(chart_data_third)
+    )
 
 
 @app.route('/map')
