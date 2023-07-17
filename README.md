@@ -1,4 +1,4 @@
-# Project-3
+# Project-3# Project-3
 
 Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 
@@ -8,10 +8,10 @@ Raw data was retrieved in CSV form. Data cleanup was preformed within Excell and
 
 Using Flask as our web framework, data stored within our PostgreSQL database was imported using psycopg2. Jsonify was used from the Flask Library to convert all SQL data into JSON format. 
 
-The Javascript libraries Chart.js and D3 were used for data visualization. Chart.js was utililzed for data graphing, while D3 was used to create a heatmap. Within the CSS, the Font Awesome ​library was used to integrate fonts to style buttons on the webpage.
+The Javascript libraries Chart.js and Leaflet were used for data visualization. Chart.js was utililzed for data graphing, while Leaflet was used to create a heatmap. Within the CSS, the Font Awesome ​library was used to integrate fonts to style buttons on the webpage.
 
 ## Summary / Conclusions
-
+Our project covers the Covid 19 pandemic. Our goal was to cover who was most affected in the US between the years 2021-2022 (may include data from 2023).
 
 ## References: 
 Provisional COVID-19 Deaths by Sex and Age (CDC)  
@@ -25,6 +25,17 @@ State Populations (US Census)
 
 US state Capitals Coordinates (stolen from someone’s github)   
 -  https://github.com/jasperdebie/VisInfo/blob/master/us-state-capitals.csv
+
+
+## Javascript Libraries:
+Leaflet (Mapping)
+- https://leafletjs.com/reference.html
+
+Chart.JS (Charts)
+- https://www.chartjs.org/docs/latest/
+
+Font Awesome (Icons, Fonts)
+-https://fontawesome.com/start
 
 
 ## Project Proposal: https://docs.google.com/document/d/1S5r0pV_Z4pcUn92i68-pTQz1liKfdy-L9NvOmP9dEjg/edit?usp=sharing
