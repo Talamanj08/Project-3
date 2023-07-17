@@ -35,7 +35,7 @@ Chart.JS (Charts)
 - https://www.chartjs.org/docs/latest/
 
 Font Awesome (Icons, Fonts)
--https://fontawesome.com/start
+- https://fontawesome.com/start
 
 
 ## Project Proposal: https://docs.google.com/document/d/1S5r0pV_Z4pcUn92i68-pTQz1liKfdy-L9NvOmP9dEjg/edit?usp=sharing
