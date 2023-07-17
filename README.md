@@ -11,7 +11,7 @@ Using Flask as our web framework, data stored within our PostgreSQL database was
 The Javascript libraries Chart.js and Leaflet were used for data visualization. Chart.js was utililzed for data charting, while Leaflet was used to create a heatmap. Within the CSS, the Font Awesome ​library was used to integrate fonts to style buttons on the webpage.
 
 ## Summary
-Our project covers the Covid-19 pandemic. Using data gathered from the CDC and US Census, we covered what was the impact of Covid in the US between the years 2021-2022 (this may also include data from 2020 and 2023). This includes death statistics and vaccine statistics, both on a state and country level.
+Our project covers the Covid-19 pandemic. Using data gathered from the CDC, US Census, and other smaller sites, we covered the impact of Covid in the US between the years 2021-2022 (this may also include data from 2020 and 2023). This includes death statistics and vaccine statistics, both on a country and state level.
 
 ## Conclusions
 __How many deaths were caused by Covid between 2020-2023?__
