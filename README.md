@@ -25,8 +25,8 @@ __How did Vaccines affect death rates?__
 - During 2021 around 451,000 people died due to Covid and Covid related illnesses, while around 238,000 people died in 2022. This results in a 53% drop in deaths between the two years.
 
 __Which state was the most and least affected by Covid?__
-- West Virgina had the highest death rates for both 2021 and 2022. The deathrate for 2021 was 16.13 people per 100,000 people, this number postively drops in 2022 with 15.22 deaths per 100,000 people.
-- New York had the lowest death rates for both 2021 and 2022. The deathrate for 2021 was 5.85 people per 100,000 people, this number nominally drops in 2022 with 5.69 deaths per 100,000 people.
+- West Virgina had the highest death rates for both 2021 and 2022. The deathrate for 2021 was 16.13 people per 100,000 people, this number postively drops in 2022 with 15.22 deaths per 1,000 people.
+- New York had the lowest death rates for both 2021 and 2022. The deathrate for 2021 was 5.85 people per 1,000 people, this number nominally drops in 2022 with 5.69 deaths per 100,000 people.
 
 ## References: 
 Provisional COVID-19 Deaths by Sex and Age (CDC)  
