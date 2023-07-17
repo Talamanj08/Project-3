@@ -4,11 +4,11 @@ Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 
 
 ## Code Info / Data Process
-Raw data was retrieved in CSV form. Data cleanup was preformed within Jupyter Notebook using Pandas and all data was stored and sorted in PostgreSQL.
+Raw data was retrieved in CSV form. Data cleanup was preformed within Excell and Jupyter Notebook using Pandas and all data was stored and sorted in PostgreSQL.
 
 Using Flask as our web framework, data stored within our PostgreSQL database was imported using psycopg2. Jsonify was used from the Flask Library to convert all SQL data into JSON format. 
 
-The Javascript libraries Chart.js and D3 were used for data visualization. Chart.js was utililzed for data graphing, while D3 was used to create a heatmap.
+The Javascript libraries Chart.js and D3 were used for data visualization. Chart.js was utililzed for data graphing, while D3 was used to create a heatmap. Within the CSS, the Font Awesome ​library was used to integrate fonts to style buttons on the webpage.
 
 ## Summary / Conclusions
 
