@@ -11,7 +11,7 @@ Using Flask as our web framework, data stored within our PostgreSQL database was
 The Javascript libraries Chart.js and Leaflet were used for data visualization. Chart.js was utililzed for data graphing, while Leaflet was used to create a heatmap. Within the CSS, the Font Awesome ​library was used to integrate fonts to style buttons on the webpage.
 
 ## Summary / Conclusions
-Our project covers the Covid 19 pandemic. Our goal was to cover who was most affected in the US between the years 2021-2022 (may include data from 2023).
+Our project covers the Covid 19 pandemic. Using data gathered from the CDC and US Census, we covered who was most affected in the US between the years 2021-2022 (may include data from 2023). This includes death statistics, 
 
 ## References: 
 Provisional COVID-19 Deaths by Sex and Age (CDC)  
