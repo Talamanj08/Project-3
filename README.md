@@ -5,7 +5,7 @@ Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 sum
 
 
-References: 
+## References: 
 Provisional COVID-19 Deaths by Sex and Age (CDC)  
 -  https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku
 
