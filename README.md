@@ -2,6 +2,8 @@
 
 Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 
+## Powerpoint link:
+https://1drv.ms/p/s!AuLeuXg21-IqgluTjiFBLVXCFvr9?e=w7r4l3
 
 ## Code Info / Data Process
 Raw data was retrieved in CSV form. Data cleanup was preformed within Excell and Jupyter Notebook using Pandas. All data was stored and sorted in PostgreSQL.
