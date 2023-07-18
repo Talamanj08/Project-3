@@ -2,7 +2,8 @@
 
 Members: Justin Talamantes, Mina Kemmer-Lee, Mason Wikoff
 
-## Powerpoint link:
+
+## Powerpoint link: (pngs of slides are located in Project-3 Presentations folder along with Website visuals)
 https://1drv.ms/p/s!AuLeuXg21-IqgluTjiFBLVXCFvr9?e=w7r4l3
 
 ## Code Info / Data Process
